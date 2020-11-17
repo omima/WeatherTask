@@ -27,12 +27,18 @@ class CitiesInteractor {
 
 // MARK:- CitiesInteractorInputProtocol
 extension CitiesInteractor: CitiesInteractorInputProtocol {
+    func loadData()  {
+        self.cities = getCities()
+        if !cities.isEmpty {
+            self.loadCityInfo()
+        }else{
+            cities = []
+            loadCities()
+        }
+    }
+    
     func loadCities()  {
-        
-        //TODO: check cities code exist
-        
         let dispatchGroup = DispatchGroup()
-        
         for item in citiesName {
             dispatchGroup.enter()
             service.fetchCity(name: item) { (result) in
@@ -49,8 +55,7 @@ extension CitiesInteractor: CitiesInteractorInputProtocol {
         }
         
         dispatchGroup.notify(queue: .main ){
-            //TODO:  save cities code
-            print("should strat new request")
+            self.save(cities: self.cities)
             self.loadCityInfo()
         }
     }
@@ -62,14 +67,12 @@ extension CitiesInteractor: CitiesInteractorInputProtocol {
         
         for item in cities {
             dispatchGroup.enter()
-
             service.fetchCityInfo(code: "\(item.id)", date: getTomorrowDate()) { (result) in
                 switch result {
                 case .success(let response):
                     let cityInfo = response.max{$0.predictability < $1.predictability}
                     if let cityWeather = cityInfo {
                         cityWeather.cityWrapper = item
-                        print(item.name)
                         self.citiesWeather.append(cityWeather)
                     }
                 case.failure(let error):
@@ -85,7 +88,9 @@ extension CitiesInteractor: CitiesInteractorInputProtocol {
             
         }
     }
-    
+}
+
+extension CitiesInteractor {
     func getTomorrowDate()-> String {
         let today = Date()
         let dateFormatter = DateFormatter()
@@ -97,6 +102,29 @@ extension CitiesInteractor: CitiesInteractorInputProtocol {
         }else{
             let todayString = dateFormatter.string(from: today)
             return todayString
+        }
+    }
+}
+
+// MARK:- save and get data
+extension CitiesInteractor {
+    func save(cities : [CityWrapper]){
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(cities){
+            UserDefaults.standard.set(encoded, forKey: "CitiesWrapper")
+        }
+    }
+    
+    func getCities() -> [CityWrapper] {
+        if let objects = UserDefaults.standard.value(forKey: "CitiesWrapper") as? Data {
+            let decoder = JSONDecoder()
+            if let objectsDecoded = try? decoder.decode(Array.self, from: objects) as [CityWrapper] {
+                return objectsDecoded
+            } else {
+                return []
+            }
+        } else {
+            return []
         }
     }
 }

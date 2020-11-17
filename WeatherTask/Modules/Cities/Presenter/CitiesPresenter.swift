@@ -20,7 +20,7 @@ class CitiesPresenter {
 // MARK:- CitiesPresenterProtocol
 extension CitiesPresenter: CitiesPresenterProtocol {
     func viewLoaded() {
-        interactor?.loadCities()
+        interactor?.loadData()
     }
 }
 

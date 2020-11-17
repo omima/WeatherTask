@@ -32,7 +32,7 @@ protocol CitiesInteractorOutputProtocol: class {
 // MARK: Presenter -> Interactor
 protocol CitiesInteractorInputProtocol: class {
     var presenter: CitiesInteractorOutputProtocol? { get set }
-    func loadCities()
+    func loadData()
 }
 
 // MARK:- Wireframe Protocols
