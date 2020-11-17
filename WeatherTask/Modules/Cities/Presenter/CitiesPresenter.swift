@@ -20,6 +20,7 @@ class CitiesPresenter {
 // MARK:- CitiesPresenterProtocol
 extension CitiesPresenter: CitiesPresenterProtocol {
     func viewLoaded() {
+        view?.showLoader()
         interactor?.loadData()
     }
     
@@ -39,7 +40,13 @@ extension CitiesPresenter: CitiesPresenterProtocol {
 // MARK:- CitiesInteractorOutputProtocol
 extension CitiesPresenter: CitiesInteractorOutputProtocol {
     func dataIsUpdated() {
+        view?.hideLoader()
         view?.reloadData()
     }
     
+    func errorOccured(error: Error) {
+        view?.hideLoader()
+        view?.showErrorMessage(text: error.localizedDescription)
+    }
+
 }

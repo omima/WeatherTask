@@ -9,7 +9,7 @@ import Foundation
 
 // MARK:- View protocols
 // MARK: Presenter -> View
-protocol CitiesViewProtocol: class {
+protocol CitiesViewProtocol: BaseViewing {
     var presenter: CitiesPresenterProtocol? { get set }
     func reloadData()
 }
@@ -30,6 +30,8 @@ protocol CitiesPresenterProtocol: class {
 // MARK: Interactor -> Presenter
 protocol CitiesInteractorOutputProtocol: class {
     func dataIsUpdated()
+    func errorOccured(error: Error)
+
 }
 
 // MARK:- Interactor Protocols

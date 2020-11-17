@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CitiesView: UIViewController {
+class CitiesView: BaseViewController {
     
     // MARK:- Constants
     struct Constants {

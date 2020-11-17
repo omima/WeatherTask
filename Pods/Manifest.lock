@@ -1,22 +1,32 @@
 PODS:
   - Alamofire (5.0.5)
+  - GeometricLoaders (1.1.1)
   - Kingfisher (5.14.1):
     - Kingfisher/Core (= 5.14.1)
   - Kingfisher/Core (5.14.1)
+  - SwiftMessages (5.0.0):
+    - SwiftMessages/App (= 5.0.0)
+  - SwiftMessages/App (5.0.0)
 
 DEPENDENCIES:
   - Alamofire
+  - GeometricLoaders
   - Kingfisher
+  - SwiftMessages (= 5.0.0)
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - GeometricLoaders
     - Kingfisher
+    - SwiftMessages
 
 SPEC CHECKSUMS:
   Alamofire: df2f8f826963b08b9a870791ad48e07a10090b2e
+  GeometricLoaders: 4fbbeb569cf0ea647c620a9ffb87c9e63812e743
   Kingfisher: 8050bc6f7f68cbf3908bd04df7ccbac188f6d6d6
+  SwiftMessages: 342d312bf8d5ac11141285c8fec6308380df7f72
 
-PODFILE CHECKSUM: d88d2b69a3f33aa96ff7121395d73fef499afee5
+PODFILE CHECKSUM: 502408c93f20a3ebe03b17c84d3f9b352c6ec2ed
 
 COCOAPODS: 1.8.4

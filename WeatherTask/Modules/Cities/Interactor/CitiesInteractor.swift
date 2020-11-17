@@ -48,7 +48,7 @@ extension CitiesInteractor: CitiesInteractorInputProtocol {
                         self.cities.append(city)
                     }
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    self.presenter?.errorOccured(error: error)
                 }
                 dispatchGroup.leave()
             }
@@ -76,7 +76,7 @@ extension CitiesInteractor: CitiesInteractorInputProtocol {
                         self.citiesWeather.append(cityWeather)
                     }
                 case.failure(let error):
-                    print(error.localizedDescription)
+                    self.presenter?.errorOccured(error: error)
                 }
                 dispatchGroup.leave()
             }

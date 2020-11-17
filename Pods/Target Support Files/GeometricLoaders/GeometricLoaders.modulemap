@@ -1,0 +1,6 @@
+framework module GeometricLoaders {
+  umbrella header "GeometricLoaders-umbrella.h"
+
+  export *
+  module * { export * }
+}
