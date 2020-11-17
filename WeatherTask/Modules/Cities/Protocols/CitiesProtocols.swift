@@ -11,6 +11,7 @@ import Foundation
 // MARK: Presenter -> View
 protocol CitiesViewProtocol: class {
     var presenter: CitiesPresenterProtocol? { get set }
+    func reloadData()
 }
 
 // MARK:- Presenter protocols
@@ -21,17 +22,21 @@ protocol CitiesPresenterProtocol: class {
     var wireFrame: CitiesWireFrameProtocol? { get set }
     
     func viewLoaded()
+    func numberOfItems() -> Int
+    func getWeatherItem(at index: Int) -> CityWeather
 }
 
 // MARK: Interactor -> Presenter
 protocol CitiesInteractorOutputProtocol: class {
-    
+    func dataIsUpdated()
 }
 
 // MARK:- Interactor Protocols
 // MARK: Presenter -> Interactor
 protocol CitiesInteractorInputProtocol: class {
     var presenter: CitiesInteractorOutputProtocol? { get set }
+    var citiesWeather : [CityWeather] { get }
+
     func loadData()
 }
 

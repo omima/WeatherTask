@@ -83,9 +83,7 @@ extension CitiesInteractor: CitiesInteractorInputProtocol {
         }
         
         dispatchGroup.notify(queue: .main ){
-            //TODO: reload the view
-            print("should strat view")
-            
+            self.presenter?.dataIsUpdated()
         }
     }
 }

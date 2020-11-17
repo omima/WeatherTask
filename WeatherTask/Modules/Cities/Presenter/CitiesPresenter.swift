@@ -22,9 +22,20 @@ extension CitiesPresenter: CitiesPresenterProtocol {
     func viewLoaded() {
         interactor?.loadData()
     }
+    
+    func numberOfItems() -> Int {
+       return interactor!.citiesWeather.count 
+    }
+    
+    func getWeatherItem(at index: Int) -> CityWeather {
+       return interactor!.citiesWeather[index]
+    }
 }
 
 // MARK:- CitiesInteractorOutputProtocol
 extension CitiesPresenter: CitiesInteractorOutputProtocol {
+    func dataIsUpdated() {
+        view?.reloadData()
+    }
     
 }
