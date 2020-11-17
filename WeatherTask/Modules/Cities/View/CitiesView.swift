@@ -32,10 +32,6 @@ class CitiesView: UIViewController {
         tableView.estimatedRowHeight = 100
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        print(tableView.frame.height)
-    }
-    
     // MARK:- Methods
     // MARK: Public Methods
     
@@ -70,6 +66,6 @@ extension CitiesView: UITableViewDelegate , UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        presenter?.openDetailsView(at: indexPath.row)
     }
 }

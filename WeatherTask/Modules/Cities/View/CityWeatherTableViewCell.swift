@@ -25,6 +25,6 @@ class CityWeatherTableViewCell: UITableViewCell {
     
     func configure(with city: CityWeather) {
         cityName.text = city.cityWrapper?.name
-        temp.text = "\(city.temp) °"
+        temp.text = "\(Int(city.temp)) °"
     }
 }

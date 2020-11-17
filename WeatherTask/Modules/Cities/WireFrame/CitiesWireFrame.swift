@@ -41,4 +41,11 @@ class CitiesWireFrame: CitiesWireFrameProtocol {
             return UIStoryboard(name: Constants.storyBoardName, bundle: nil)
         }
     }
+    
+    func openDetails(from view:CitiesViewProtocol, with weather: CityWeather){
+        let detailsView = CityDetailsWireFrame.createCityDetailsView(with: weather)
+        if let sourceView = view as? UIViewController {
+            sourceView.present(detailsView, animated: true, completion: nil)
+        }
+    }
 }

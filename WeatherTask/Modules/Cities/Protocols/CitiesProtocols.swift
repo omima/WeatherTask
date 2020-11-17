@@ -24,6 +24,7 @@ protocol CitiesPresenterProtocol: class {
     func viewLoaded()
     func numberOfItems() -> Int
     func getWeatherItem(at index: Int) -> CityWeather
+    func openDetailsView(at index : Int)
 }
 
 // MARK: Interactor -> Presenter
@@ -43,4 +44,5 @@ protocol CitiesInteractorInputProtocol: class {
 // MARK:- Wireframe Protocols
 protocol CitiesWireFrameProtocol: class {
     static func createCitiesView() -> CitiesView
+    func openDetails(from view:CitiesViewProtocol, with weather: CityWeather)
 }

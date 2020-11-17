@@ -30,6 +30,10 @@ extension CitiesPresenter: CitiesPresenterProtocol {
     func getWeatherItem(at index: Int) -> CityWeather {
        return interactor!.citiesWeather[index]
     }
+    
+    func openDetailsView(at index : Int) {
+        wireFrame?.openDetails(from: view!, with:  interactor!.citiesWeather[index])
+    }
 }
 
 // MARK:- CitiesInteractorOutputProtocol
