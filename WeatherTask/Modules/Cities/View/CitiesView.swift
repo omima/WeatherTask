@@ -20,7 +20,10 @@ class CitiesView: UIViewController {
     // MARK: Outlets
     
     // MARK:- UIViewController
-    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        presenter?.viewLoaded()
+    }
     
     // MARK:- Methods
     // MARK: Public Methods

@@ -22,8 +22,8 @@ class CitiesWireFrame: CitiesWireFrameProtocol {
         // Generating module components
         let view = storyBoard.instantiateViewController(withIdentifier: Constants.viewIdentifier) as! CitiesView
         let presenter: CitiesPresenterProtocol & CitiesInteractorOutputProtocol = CitiesPresenter()
-        let interactor: CitiesInteractorInputProtocol = CitiesInteractor()
-        let apiDataManager: CitiesAPIDataManagerInputProtocol = CitiesAPIDataManager()
+        let service = CitiesAPIDataManager()
+        let interactor: CitiesInteractorInputProtocol = CitiesInteractor(service: service)
         let wireFrame: CitiesWireFrameProtocol = CitiesWireFrame()
         
         // Connecting
@@ -32,7 +32,6 @@ class CitiesWireFrame: CitiesWireFrameProtocol {
         presenter.wireFrame = wireFrame
         presenter.interactor = interactor
         interactor.presenter = presenter
-        interactor.APIDataManager = apiDataManager
         
         return view
     }

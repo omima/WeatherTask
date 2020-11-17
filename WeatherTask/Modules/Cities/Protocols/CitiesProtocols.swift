@@ -19,6 +19,8 @@ protocol CitiesPresenterProtocol: class {
     var view: CitiesViewProtocol? { get set }
     var interactor: CitiesInteractorInputProtocol? { get set }
     var wireFrame: CitiesWireFrameProtocol? { get set }
+    
+    func viewLoaded()
 }
 
 // MARK: Interactor -> Presenter
@@ -30,15 +32,10 @@ protocol CitiesInteractorOutputProtocol: class {
 // MARK: Presenter -> Interactor
 protocol CitiesInteractorInputProtocol: class {
     var presenter: CitiesInteractorOutputProtocol? { get set }
-    var APIDataManager: CitiesAPIDataManagerInputProtocol? { get set }
+    func loadCities()
 }
 
 // MARK:- Wireframe Protocols
 protocol CitiesWireFrameProtocol: class {
     static func createCitiesView() -> CitiesView
-}
-
-// MARK:- APIDATAMANAGER Protocols
-protocol CitiesAPIDataManagerInputProtocol: class {
-    
 }
