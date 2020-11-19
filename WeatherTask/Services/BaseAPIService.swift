@@ -10,7 +10,6 @@ import Alamofire
 
 class BaseAPIService {
     
-    
     public enum HTTPMethod : String{
         case get = "GET"
         case post = "POST"
@@ -22,6 +21,9 @@ class BaseAPIService {
     
     func execute<Model: Codable>(endPoint: Endpoint, method:BaseAPIService.HTTPMethod = .get, parameters:[String:Any] = [:],completionHandler: @escaping (Swift.Result<Model, Error>) -> Void) {
     
+        if !isConnected() {
+            completionHandler(Swift.Result.failure(BaseAPIServiceError.networkError))
+        }
         let endpointUrl = getFullUrl(for: endPoint)
         AF.request(endpointUrl, method: Alamofire.HTTPMethod.init(rawValue: method.rawValue), parameters: parameters, headers: nil).responseData { (response) in
               switch response.result {
@@ -37,7 +39,10 @@ class BaseAPIService {
                 completionHandler(Swift.Result.failure(BaseAPIServiceError.serverError(message: error.localizedDescription)))
               }
           }
-
     }
+     func isConnected() ->Bool {
+        return NetworkReachabilityManager()!.isReachable
+    }
+    
 }
 

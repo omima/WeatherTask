@@ -8,8 +8,6 @@ target 'WeatherTask' do
   # Pods for WeatherTask
   pod 'Alamofire'
   pod 'Kingfisher'
-  pod 'SwiftMessages', '5.0.0'
-  pod 'GeometricLoaders'
   
   target 'WeatherTaskTests' do
     inherit! :search_paths

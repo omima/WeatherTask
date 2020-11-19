@@ -62,7 +62,11 @@ extension CitiesInteractor: CitiesInteractorInputProtocol {
     
     
     func loadCityInfo() {
-        guard !cities.isEmpty else {return}
+        guard !cities.isEmpty && service.isConnected() else {
+            self.presenter?.errorOccured(error: BaseAPIServiceError.networkError)
+            return
+            
+        }
         let dispatchGroup = DispatchGroup()
         
         for item in cities {

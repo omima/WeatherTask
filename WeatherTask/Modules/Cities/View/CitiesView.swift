@@ -13,7 +13,6 @@ class CitiesView: BaseViewController {
     // MARK:- Constants
     struct Constants {
         static let cellIdentifier = "CityWeatherTableViewCell"
-        
     }
     
     // MARK:- Properties
@@ -25,11 +24,13 @@ class CitiesView: BaseViewController {
     // MARK:- UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter?.viewLoaded()
         registerCell()
         
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 100
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        presenter?.viewLoaded()
     }
     
     // MARK:- Methods

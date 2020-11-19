@@ -6,8 +6,7 @@
 //
 
 import Foundation
-import SwiftMessages
-import GeometricLoaders
+import UIKit
 
 protocol BaseViewing: class {
     func showLoader()
@@ -18,39 +17,47 @@ protocol BaseViewing: class {
 
 class BaseViewController: UIViewController, BaseViewing {
 
-    lazy var container: Infinity = {
-        return Infinity.createGeometricLoader()
-    }()
-    
-    func showErrorMessage(text: String?) {
-        let view = MessageView.viewFromNib(layout: .messageView)
-        view.configureTheme(Theme.error, iconStyle: IconStyle.none)
-        view.configureDropShadow()
-        view.button?.isHidden = true
-        view.configureContent(title: nil, body: text, iconImage: nil, iconText: nil, buttonImage: nil, buttonTitle: nil, buttonTapHandler: nil)
-        view.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-        var config = SwiftMessages.Config.init()
-        config.presentationContext = .window(windowLevel: UIWindow.Level.normal.rawValue)
-        SwiftMessages.show(config: config, view: view)
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        return indicator
+       }()
+
+    override func viewDidAppear(_ animated: Bool) {
+        configureLoading()
+    }
+
+    func configureLoading() {
+        activityIndicator.color = .white
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        let viewController = UIApplication.shared.windows.filter{$0.isKeyWindow}.first?.rootViewController
+        viewController?.view.addSubview(activityIndicator)
+        activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
     
     func showSuccessMessage(text: String?) {
-        let view = MessageView.viewFromNib(layout: .messageView)
-        view.configureTheme(Theme.success, iconStyle: IconStyle.none)
-        view.configureDropShadow()
-        view.button?.isHidden = true
-        view.configureContent(title: nil, body: text, iconImage: nil, iconText: nil, buttonImage: nil, buttonTitle: nil, buttonTapHandler: nil)
-        view.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-        SwiftMessages.show(view: view)
+        let alertController = UIAlertController(title: "Success", message: text, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        let viewController = UIApplication.shared.windows.filter{$0.isKeyWindow}.first?.rootViewController
+        
+        viewController?.present(alertController, animated: true, completion: nil)
+    }
+    
+    func showErrorMessage(text: String?) {
+        let alertController = UIAlertController(title: "ERROR", message: text, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        let viewController = UIApplication.shared.windows.filter{$0.isKeyWindow}.first?.rootViewController
+        
+        viewController?.present(alertController, animated: true, completion: nil)
     }
     
     func showLoader() {
-        container.circleColor = UIColor.white
-        container.startAnimation()
+        activityIndicator.startAnimating()
     }
     
     func hideLoader() {
-        container.stopAnimation()
+        self.activityIndicator.stopAnimating()
     }
+    
 }
 
