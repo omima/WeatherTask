@@ -3,20 +3,32 @@ PODS:
   - Kingfisher (5.14.1):
     - Kingfisher/Core (= 5.14.1)
   - Kingfisher/Core (5.14.1)
+  - Mockit (1.5.0)
+  - Nimble (9.0.0)
+  - Quick (3.0.0)
 
 DEPENDENCIES:
   - Alamofire
   - Kingfisher
+  - Mockit
+  - Nimble
+  - Quick
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - Kingfisher
+    - Mockit
+    - Nimble
+    - Quick
 
 SPEC CHECKSUMS:
   Alamofire: df2f8f826963b08b9a870791ad48e07a10090b2e
   Kingfisher: 8050bc6f7f68cbf3908bd04df7ccbac188f6d6d6
+  Mockit: 09492d654a2945096603d76ea77b131bdcfb2233
+  Nimble: 3b4ec3fd40f1dc178058e0981107721c615643d8
+  Quick: 6d9559f40647bc4d510103842ef2fdd882d753e2
 
-PODFILE CHECKSUM: 3d414b26037796b0727a2ce94b9bbde72bca46cb
+PODFILE CHECKSUM: aa2f63461cf32b47da71e79c5487ba60ac34eb6e
 
 COCOAPODS: 1.8.4

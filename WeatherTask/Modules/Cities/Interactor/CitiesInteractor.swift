@@ -9,9 +9,13 @@ import Foundation
 
 class CitiesInteractor {
     
+    // MARK:- Constants
+    struct Constants {
+        static let citiesWrapperKey = "CitiesWrapper"
+    }
+    
     // MARK:- Properties
     weak var presenter: CitiesInteractorOutputProtocol?
-    
     private let service: CitiesAPIDataManager
     
     var citiesName = ["Gothenburg","Stockholm", "Mountain View","London","New York", "Berlin"]
@@ -71,7 +75,7 @@ extension CitiesInteractor: CitiesInteractorInputProtocol {
         
         for item in cities {
             dispatchGroup.enter()
-            service.fetchCityInfo(code: "\(item.id)", date: getTomorrowDate()) { (result) in
+            service.fetchCityInfo(code: "\(item.id)", date: getTomorrow(date: Date())) { (result) in
                 switch result {
                 case .success(let response):
                     let cityInfo = response.max{$0.predictability < $1.predictability}
@@ -93,16 +97,15 @@ extension CitiesInteractor: CitiesInteractorInputProtocol {
 }
 
 extension CitiesInteractor {
-    func getTomorrowDate()-> String {
-        let today = Date()
+    func getTomorrow(date: Date)-> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy/MM/dd"
         
-        if let tomorrow = today.tomorrow {
+        if let tomorrow = date.tomorrow {
             let tomorrowString = dateFormatter.string(from: tomorrow)
             return tomorrowString
         }else{
-            let todayString = dateFormatter.string(from: today)
+            let todayString = dateFormatter.string(from: date)
             return todayString
         }
     }
@@ -113,12 +116,12 @@ extension CitiesInteractor {
     func save(cities : [CityWrapper]){
         let encoder = JSONEncoder()
         if let encoded = try? encoder.encode(cities){
-            UserDefaults.standard.set(encoded, forKey: "CitiesWrapper")
+            UserDefaults.standard.set(encoded, forKey: Constants.citiesWrapperKey)
         }
     }
     
     func getCities() -> [CityWrapper] {
-        if let objects = UserDefaults.standard.value(forKey: "CitiesWrapper") as? Data {
+        if let objects = UserDefaults.standard.value(forKey: Constants.citiesWrapperKey) as? Data {
             let decoder = JSONDecoder()
             if let objectsDecoded = try? decoder.decode(Array.self, from: objects) as [CityWrapper] {
                 return objectsDecoded
