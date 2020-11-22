@@ -12,7 +12,7 @@ import Foundation
 // MARK: Presenter -> View
 protocol CityDetailsViewProtocol: class {
     var presenter: CityDetailsPresenterProtocol? { get set }
-    func configureView(with city : CityWeather, imageUrl : String)
+    func configureView(with city : CityDetailsViewModel)
 }
 
 // MARK:- Presenter protocols

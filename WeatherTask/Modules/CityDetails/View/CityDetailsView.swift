@@ -42,17 +42,16 @@ class CityDetailsView: UIViewController {
 
 // MARK:- CityDetailsViewProtocol
 extension CityDetailsView: CityDetailsViewProtocol {
-    func configureView(with city: CityWeather, imageUrl: String) {
-        cityName.text = city.cityWrapper?.name
+    func configureView(with city: CityDetailsViewModel) {
+        
+        cityName.text = city.cityName
         weatherStateLabel.text = city.weatherState
-        let theTemp = Int(city.temp)
-        temp.text = "\(theTemp) °"
-        maxTemp.text = "H:\(Int(city.maxTemp)) °"
-        minTemp.text = "L:\(Int(city.minTemp)) °"
-        let url = URL(string: imageUrl)
-        weatherState.kf.setImage(with: url)
-        humidity.text = "\(city.humidity) %"
-        windSpeed.text = "\(Int(city.windSpeed))"
-    
+        temp.text = city.temp
+        maxTemp.text = city.maxTemp
+        minTemp.text = city.maxTemp
+        weatherState.kf.setImage(with: city.imageUrl)
+        humidity.text = city.humidity
+        windSpeed.text = city.windSpeed
     }
+
 }
