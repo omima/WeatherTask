@@ -28,9 +28,9 @@ class CitiesInteractorTests: QuickSpec {
                 it("Should return tomorrow date") {
                     let dateString = "2020/11/21"
                     let dateFormatter = DateFormatter()
-                    dateFormatter.dateFormat = "dd/MM/yyyy"
+                    dateFormatter.dateFormat = "yyyy/MM/dd"
                     let dateFromString = dateFormatter.date(from: dateString)
-                    expect( interactor.getTomorrow(date: dateFromString ?? Date())).to(equal("2020/11/22"))
+                    expect( interactor.getTomorrow(date: dateFromString!)).to(equal("2020/11/22"))
                 }
             }
         }
