@@ -22,15 +22,14 @@ class BaseViewController: UIViewController, BaseViewing {
         return indicator
        }()
 
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewDidLoad() {
         configureLoading()
     }
-
+    
     func configureLoading() {
         activityIndicator.color = .white
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        let viewController = UIApplication.shared.windows.filter{$0.isKeyWindow}.first?.rootViewController
-        viewController?.view.addSubview(activityIndicator)
+        self.view.addSubview(activityIndicator)
         activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }

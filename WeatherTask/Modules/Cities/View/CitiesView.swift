@@ -25,11 +25,6 @@ class CitiesView: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         registerCell()
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         presenter?.viewLoaded()
     }
     
